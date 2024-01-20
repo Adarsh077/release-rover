@@ -4,12 +4,11 @@ const schedule = require("node-schedule");
 const { token } = require("./config.json");
 const registerCommands = require("./register-commands");
 const checkForNewEpisodes = require("./check-for-new-episodes");
+const config = require("./config.json");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-mongoose
-  .connect("mongodb://localhost:27017/release-rover")
-  .then(() => console.log("DB connected!!"));
+mongoose.connect(config.mongodb).then(() => console.log("DB connected!!"));
 
 registerCommands(client);
 
